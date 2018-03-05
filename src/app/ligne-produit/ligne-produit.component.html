@@ -1,7 +1,7 @@
 
 <div *ngIf="brouillon; else pasdeLigneProduit">
   <mat-select placeholder="Supra" [(ngModel)]="brouillon.supra" [compareWith]="compareFn" required #supra="ngModel">
-    <mat-option *ngFor="let supra of supras" [value]="supra">
+    <mat-option *ngFor="let supra of _supras_simples" [value]="supra">
       {{ supra.libelle }}
     </mat-option>
   </mat-select>

@@ -12,8 +12,9 @@ import { Supra } from '../supra';
 export class LigneProduitComponent implements OnInit {
 
   private _ligne_produit: LigneProduit;
-  brouillon: LigneProduit;
-  @Input() public supras: Supra[];
+  public brouillon: LigneProduit;
+  public _supras: Supra[];
+  public _supras_simples: Supra[];
 
   constructor(private http: HttpService) { }
 
@@ -32,16 +33,31 @@ export class LigneProduitComponent implements OnInit {
     }
   }
 
+  @Input()
+  set supras(supras: Supra[]) {
+    if (supras) {
+      this._supras = supras;
+      /*  Un autre tableau de supras est nécessaire pour avoir les supras sans leurs lignes produit
+          autrement, une erreur d'object cyclique est causée lors de http.put (objet stringified) */
+      this._supras_simples = supras.map(supra => {
+        let s = new Supra();
+        s.id = supra.id;
+        s.libelle = supra.libelle;
+        return s;
+      });
+    }
+  }
+
   enregistrer() {
-    this.brouillon.supra.lignes_produit = undefined;
     this.http.put('lignes_produit', this.brouillon).subscribe(
       () => {
         if (this.brouillon.supra.id != this._ligne_produit.supra.id) {
-          console.log('changement');
-          let old_supra = this.supras.find(s => s.id === this._ligne_produit.supra.id);
+          let old_supra = this._supras.find(s => s.id === this._ligne_produit.supra.id);
           let index = old_supra.lignes_produit.findIndex(l => l==this._ligne_produit);
-          old_supra.lignes_produit.slice(index, 1);
-          this.supras.find(s => s.id === this.brouillon.supra.id).lignes_produit.push(this._ligne_produit);
+          old_supra.lignes_produit.splice(index, 1);
+          let lignes_produits = this._supras.find(s => s.id === this.brouillon.supra.id).lignes_produit;
+          lignes_produits.push(this._ligne_produit);
+          lignes_produits.sort(LigneProduit.sort)
         }
         Object.assign(this._ligne_produit, this.brouillon);
       }

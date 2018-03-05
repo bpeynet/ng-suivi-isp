@@ -20,6 +20,9 @@ export class LignesProduitComponent implements OnInit {
     this.http.get('supras?relations=lignes_produit').subscribe(
       (supras: Supra[]) => {
         this.supras = supras;
+        this.supras.map(s => {
+          s.lignes_produit.sort(LigneProduit.sort);
+        });
       }
     );
   }
