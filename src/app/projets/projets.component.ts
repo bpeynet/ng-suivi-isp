@@ -27,12 +27,7 @@ export class ProjetsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    /*this.route.data
-    .subscribe((data: { projets: Observable<Projet[]> }) => {
-      this.projets = data.projets;
-    });*/
     this.projets = this.route.snapshot.data.projets;
-    //this.projets = this.http.get('projets?relations=ligne_produit.supra');
     this.http.get('supras?relations=lignes_produit')
       .subscribe((supras: Supra[]) => {
         this.supras = supras;
