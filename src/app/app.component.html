@@ -1,4 +1,4 @@
-<mat-toolbar style="position: fixed; z-index:999; background-color: #1d2127; color: white;"
+<mat-toolbar style="position: fixed; z-index:999; background-color: #1d2127; color: white; max-height: 50px; min-height: 50px;"
   class="mat-elevation-z2">
   <mat-toolbar-row>
     <h1>Suivi des ISP</h1>
@@ -22,7 +22,7 @@
 </mat-toolbar>
 
 <mat-sidenav-container>
-  <mat-sidenav #sidenav opened mode="side" fixedInViewport fixedTopGap=50
+  <mat-sidenav #sidenav opened mode="side" fixedInViewport fixedTopGap=40
     [ngStyle]="{ 'width.em': sidenavWidth }" opened="true"
     (click)="ouvre()" (mouseleave)="ferme()"
     style="background-color: #2C2F36; color: white;">
@@ -49,7 +49,7 @@
       </mat-list-item>
     </mat-list>
   </mat-sidenav>
-  <mat-sidenav-content style="margin-top: 64px; padding: 0 20px;">
+  <mat-sidenav-content style="margin-top: 55px; padding: 0 20px;">
     <router-outlet></router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>
