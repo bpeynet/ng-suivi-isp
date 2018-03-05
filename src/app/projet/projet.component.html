@@ -1,0 +1,35 @@
+<h1>{{data.projet.nom}}</h1>
+<mat-form-field>
+  <mat-select placeholder="Ligne produit" [(ngModel)]="brouillon.ligne_produit" [compareWith]="compareFn">
+    <mat-optgroup *ngFor="let supra of supras" [label]="supra.libelle">
+      <mat-option *ngFor="let ligne_produit of supra.lignes_produit" [value]="ligne_produit">
+        {{ ligne_produit.libelle }}
+      </mat-option>
+    </mat-optgroup>
+  </mat-select>
+</mat-form-field>
+
+<mat-form-field>
+  <input matInput placeholder="Code" [(ngModel)]="brouillon.code" type="number">
+</mat-form-field>
+
+<mat-form-field>
+  <input matInput placeholder="Nom" [(ngModel)]="brouillon.nom">
+</mat-form-field>
+
+<mat-form-field>
+  <input matInput placeholder="Chef de projet" [(ngModel)]="brouillon.chef">
+</mat-form-field>
+
+<mat-form-field>
+  <input matInput placeholder="Programme" [(ngModel)]="brouillon.programme">
+</mat-form-field>
+
+<mat-form-field>
+  <textarea matInput matTextareaAutosize placeholder="Commentaires" [(ngModel)]="brouillon.commentaires"></textarea>
+</mat-form-field>
+
+<mat-dialog-actions>
+  <button mat-button (click)="annuler()">Annuler</button>
+  <button mat-button (click)="save()">Enregistrer</button>
+</mat-dialog-actions>

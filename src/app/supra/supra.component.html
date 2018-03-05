@@ -1,0 +1,10 @@
+<div *ngIf="brouillon; else pasdeSupra">
+  <mat-form-field>
+    <input matInput placeholder="Nom" [(ngModel)]="brouillon.libelle" required #nom="ngModel" />
+  </mat-form-field>
+
+  <button mat-button (click)="enregistrer()" [disabled]="nom.invalid || !nom.dirty">Enregistrer</button>
+</div>
+<ng-template #pasdeSupra>
+  <p>Choisissez une supra</p>
+</ng-template>

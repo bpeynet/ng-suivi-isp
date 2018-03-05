@@ -1,0 +1,11 @@
+<mat-select placeholder="Supra" [(ngModel)]="ligne_produit.supra" required #supra="ngModel">
+  <mat-option *ngFor="let supra of supras" [value]="supra">
+    {{ supra.libelle }}
+  </mat-option>
+</mat-select>
+
+<mat-form-field>
+  <input matInput placeholder="Nom" [(ngModel)]="ligne_produit.libelle" required #nom="ngModel">
+</mat-form-field>
+
+<button mat-button (click)="creer()" [disabled]="nom.invalid || supra.invalid">Créer</button>

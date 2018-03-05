@@ -1,0 +1,27 @@
+
+<div class="row" style="margin-top: 10px; padding-bottom: 10px;">
+  <div class="col-sm-4">
+    <mat-card style="width:100%">
+      <table class="table table-hover table-sm" *ngIf="supras">
+        <thead class="thead-dark">
+          <th>Supras</th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let supra of supras" (click)="select(supra)">
+            <td>{{supra.libelle}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </mat-card>
+  </div>
+
+  <div class="col-sm-4">
+    <h2>Modifier une supra</h2>
+    <supra [supra]="selected"></supra>
+  </div>
+
+  <div class="col-sm-4">
+    <h2>Créer une supra</h2>
+    <supra-form [supras]="supras"></supra-form>
+  </div>
+</div>

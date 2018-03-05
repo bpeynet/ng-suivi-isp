@@ -1,0 +1,20 @@
+
+<div *ngIf="brouillon; else pasdeLigneProduit">
+  <mat-select placeholder="Supra" [(ngModel)]="brouillon.supra" [compareWith]="compareFn" required #supra="ngModel">
+    <mat-option *ngFor="let supra of supras" [value]="supra">
+      {{ supra.libelle }}
+    </mat-option>
+  </mat-select>
+
+  <mat-form-field>
+    <input matInput placeholder="Nom" [(ngModel)]="brouillon.libelle" required #nom="ngModel" />
+  </mat-form-field>
+
+  <button mat-button (click)="enregistrer()"
+    [disabled]="(nom.invalid || !nom.dirty) && (supra.invalid || !supra.dirty)">
+    Enregistrer
+  </button>
+</div>
+<ng-template #pasdeLigneProduit>
+  <p>Choisissez une ligne produit</p>
+</ng-template>

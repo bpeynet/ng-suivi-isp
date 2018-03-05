@@ -1,0 +1,45 @@
+<mat-accordion>
+  <mat-expansion-panel #filtres expanded>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Filtres
+      </mat-panel-title>
+      <mat-panel-description>
+        Cliquer ici pour {{ filtres.expanded ? 'cacher' : 'afficher' }} les champs
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <mat-button-toggle #CNIL>CNIL</mat-button-toggle>
+    <mat-button-toggle #RGS>Homolgation RGS ?</mat-button-toggle>
+    <mat-button-toggle #exigences_metier>Exigences métier</mat-button-toggle>
+  </mat-expansion-panel>
+</mat-accordion>
+
+<mat-card>
+  <table matSort (matSortChange)="sortData($event)">
+    <tr>
+      <th mat-sort-header="code">Code Colibri</th>
+      <th mat-sort-header="nom">Jalon</th>
+      <th>Type de suivi</th>
+      <th>CNIL ?</th>
+      <th>Homologation RGS ?</th>
+      <th>Exigences métier ?</th>
+      <th>Avancement</th>
+      <th mat-sort-header="commentaires">Commentaires</th>
+      <th mat-sort-header="date_creation">Date de création</th>
+      <th mat-sort-header="date_derniere_modif">Dernière modification</th>
+    </tr>
+    <tr *ngFor="let version of versions | async">
+      <td>{{version.code_colibri}}</td>
+      <td>{{version.jalon}}</td>
+      <td>{{version.suivi}}</td>
+      <td>{{version.CNIL}}</td>
+      <td>{{version.homologation_RGS}}</td>
+      <td>{{version.exigences_metier}}</td>
+      <td>{{version.avancement}}</td>
+      <td>{{version.commentaires}}</td>
+      <td>{{version.date_creation | toDate}}</td>
+      <td>{{version.date_derniere_modif | toDate}}</td>
+    </tr>
+  </table>
+</mat-card>

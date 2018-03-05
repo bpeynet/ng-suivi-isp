@@ -1,19 +1,55 @@
+<mat-toolbar style="position: fixed; z-index:999; background-color: #1d2127; color: white;"
+  class="mat-elevation-z2">
+  <mat-toolbar-row>
+    <h1>Suivi des ISP</h1>
+    <span style="flex: 1 0 auto;"></span>
+    <button mat-icon-button routerLink="" routerLinkActive="active"
+      [routerLinkActiveOptions]="{exact: true}">
+      <mat-icon>home</mat-icon>
+    </button>
+    <button mat-icon-button (click)="sidenav.toggle()">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <mat-menu #appMenu="matMenu" [overlapTrigger]="false">
+      <button mat-menu-item>Projet</button>
+      <button mat-menu-item>Version</button>
+    </mat-menu>
+
+    <button mat-icon-button [matMenuTriggerFor]="appMenu">
+      <mat-icon>add</mat-icon>
+    </button>
+  </mat-toolbar-row>
+</mat-toolbar>
+
 <mat-sidenav-container>
-  <mat-sidenav #sidenav opened mode="side" fixedInViewport
-    style="background-color: #00894f; color: white;">
-    <mat-toolbar style="background-color: #036b3f; color: white;" layout="row">
-      <h1 class="mat-toolbar-tools">Barre latérale</h1>
-      <button mat-button (click)="sidenav.close()">Fermer</button>
-    </mat-toolbar>
-    <button mat-button (click)="sidenav.close()">Fermer</button>
+  <mat-sidenav #sidenav opened mode="side" fixedInViewport fixedTopGap=50
+    [ngStyle]="{ 'width.em': sidenavWidth }" opened="true"
+    (click)="ouvre()" (mouseleave)="ferme()"
+    style="background-color: #2C2F36; color: white;">
+    <mat-list>
+      <mat-list-item style="color: white;">
+        <button mat-icon-button (click)="sidenav.close()">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-list-item>
+      <mat-list-item style="color: white;" routerLink="projets" routerLinkActive="active">
+        Projets
+      </mat-list-item>
+      <mat-list-item style="color: white;" routerLink="versions" routerLinkActive="active">
+        Versions
+      </mat-list-item>
+      <mat-list-item style="color: white;" routerLink="acteurs" routerLinkActive="active">
+        Acteurs
+      </mat-list-item>
+      <mat-list-item style="color: white;" routerLink="lignesproduits" routerLinkActive="active">
+        Lignes produits
+      </mat-list-item>
+      <mat-list-item style="color: white;" routerLink="supra" routerLinkActive="active">
+        Supra
+      </mat-list-item>
+    </mat-list>
   </mat-sidenav>
-  <mat-sidenav-content>
-    <div style="text-align:center">
-      <h1>
-        Bienvenue sur l'Outil de suivi des études ISP !
-      </h1>
-      <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg=="><br>
-      <button mat-button (click)="sidenav.toggle()">Barre latérale</button>
-    </div>
+  <mat-sidenav-content style="margin-top: 64px; padding: 0 20px;">
+    <router-outlet></router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>

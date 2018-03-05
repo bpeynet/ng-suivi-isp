@@ -1,0 +1,6 @@
+
+<mat-form-field>
+  <input matInput placeholder="Nom" [(ngModel)]="supra.libelle" required #nom="ngModel">
+</mat-form-field>
+
+<button mat-button (click)="creer()" [disabled]="nom.invalid">Créer</button>

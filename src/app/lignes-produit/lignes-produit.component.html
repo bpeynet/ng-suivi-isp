@@ -1,0 +1,31 @@
+
+<div class="row" style="margin-top: 10px; padding-bottom: 10px;">
+  <div class="col-sm-4">
+    <mat-card style="width:100%">
+      <table class="table table-hover table-sm" *ngIf="supras">
+        <thead class="thead-dark">
+          <th>Supra</th>
+          <th>Ligne produit</th>
+        </thead>
+        <tbody>
+          <ng-template ngFor let-supra [ngForOf]="supras">
+            <tr *ngFor="let ligne_produit of supra.lignes_produit; first as first" (click)="selected=ligne_produit">
+              <td *ngIf="first" [attr.rowspan]="supra.lignes_produit.length">{{supra.libelle}}</td>
+              <td>{{ligne_produit.libelle}}</td>
+            </tr>
+          </ng-template>
+        </tbody>
+      </table>
+    </mat-card>
+  </div>
+
+  <div class="col-sm-4">
+    <h2>Modifier une ligne produit</h2>
+    <ligne-produit [ligne_produit]="selected" [supras]="supras"></ligne-produit>
+  </div>
+
+  <div class="col-sm-4">
+    <h2>Créer une ligne produit</h2>
+    <ligne-produit-form [supras]="supras"></ligne-produit-form>
+  </div>
+</div>

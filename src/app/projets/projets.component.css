@@ -1,0 +1,35 @@
+table {
+  width: 100%;
+}
+
+#colonne-actions {
+  width: 30px;
+}
+
+#colonne-ligne_produit {
+  //width: 30px;
+}
+
+#colonne-code {
+  width: 30px;
+}
+
+#colonne-nom {
+  //width: 30px;
+}
+
+#colonne-chef {
+  //width: 30px;
+}
+
+#colonne-commentaires {
+  width: 140px;
+}
+
+#colonne-date_creation {
+  width: 30px;
+}
+
+#colonne-date_derniere_modif {
+  width: 30px;
+}

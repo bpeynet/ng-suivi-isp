@@ -1,0 +1,73 @@
+<mat-accordion>
+  <mat-expansion-panel #filtres expanded>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Filtres
+      </mat-panel-title>
+      <mat-panel-description>
+        Cliquer ici pour {{ filtres.expanded ? 'cacher' : 'afficher' }} les champs
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <mat-form-field>
+      <input #filtresupra matInput placeholder="Supra" list="supras"/>
+      <datalist id="supras">
+        <option *ngFor="let supra of supras">{{ supra.libelle }}<option>
+      </datalist>
+    </mat-form-field>
+    <mat-form-field>
+      <input #filtreligneproduit matInput placeholder="Ligne produit" list="lignes_produit"/>
+      <datalist id="lignes_produit">
+        <option *ngFor="let ligne_produit of lignesproduit | async" value="{{ ligne_produit.libelle }}">
+          {{ ligne_produit.supra.libelle + '-' + ligne_produit.libelle }}
+        </option>
+      </datalist>
+    </mat-form-field>
+    <mat-form-field>
+      <input #filtrecode matInput placeholder="Code" type="number"/>
+    </mat-form-field>
+    <mat-form-field>
+      <input #filtrenom matInput placeholder="Nom" />
+    </mat-form-field>
+    <mat-form-field>
+      <input #filtrechef matInput placeholder="Chef de projet" />
+    </mat-form-field>
+    <mat-form-field>
+      <input #filtreprogramme matInput placeholder="Programme" />
+    </mat-form-field>
+  </mat-expansion-panel>
+</mat-accordion>
+
+<mat-card>
+  <table matSort (matSortChange)="sortData($event)">
+    <tr>
+      <th id="colonne-actions"></th>
+      <th id="colonne-ligne_produit">Supra - Ligne de produit</th>
+      <th id="colonne-code" mat-sort-header="code">Code</th>
+      <th id="colonne-nom" mat-sort-header="nom">Nom</th>
+      <th id="colonne-chef" mat-sort-header="chef">Chef de projet</th>
+      <th id="colonne-programme" mat-sort-header="programme">Programme</th>
+      <th id="colonne-commentaires" mat-sort-header="commentaires">Commentaires</th>
+      <th id="colonne-date_creation" mat-sort-header="date_creation">Date de création</th>
+      <th id="colonne-date_derniere_modif" mat-sort-header="date_derniere_modif">Dernière modification</th>
+    </tr>
+    <tr *ngFor="let projet of projets | filtre_projets_supra : filtresupra.value | filtre_projets_ligneproduit : filtreligneproduit.value | filtre_projets_nom : filtrenom.value | filter : filtrecode.value : 'code' | filter : filtrechef.value : 'chef' | filter : filtreprogramme.value : 'programme'">
+      <td>
+        <button mat-icon-button (click)="edit(projet)">
+          <mat-icon>mode_edit</mat-icon>
+        </button>
+      </td>
+      <td>{{projet.ligne_produit ?
+        projet.ligne_produit.supra.libelle + ' - ' + projet.ligne_produit.libelle
+        : "Pas associé"
+      }}</td>
+      <td>{{projet.code}}</td>
+      <td>{{projet.nom}}</td>
+      <td>{{projet.chef}}</td>
+      <td>{{projet.programme}}</td>
+      <td><span innerHTML="{{projet.commentaires}}"></span></td>
+      <td>{{projet.date_creation | toDate }}</td>
+      <td>{{projet.date_derniere_modif | toDate }}</td>
+    </tr>
+  </table>
+</mat-card>
