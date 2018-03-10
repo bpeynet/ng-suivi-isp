@@ -8,15 +8,37 @@
         Cliquer ici pour {{ filtres.expanded ? 'cacher' : 'afficher' }} les champs
       </mat-panel-description>
     </mat-expansion-panel-header>
+
+    <mat-form-field>
+      <mat-select #projetsSelector placeholder="Projets" multiple>
+        <mat-option *ngFor="let projet of projets" [value]="projet.id">{{projet.code + ' - ' + projet.nom}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-select #jalonsSelector placeholder="Jalons" multiple>
+        <mat-option *ngFor="let jalon of jalons" [value]="jalon.id">{{jalon.nom}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-select #typesDeSuiviSelector placeholder="Types de suivi" multiple>
+        <mat-option *ngFor="let type_de_suivi of types_de_suivi" [value]="type_de_suivi.id">{{type_de_suivi.type}}</mat-option>
+      </mat-select>
+    </mat-form-field>
     <button mat-button (click)="CNILsuivant()">CNIL : {{etats_de_filtre[CNIL]}}</button>
     <button mat-button (click)="RGSsuivant()">Homologation RGS : {{etats_de_filtre[RGS]}}</button>
     <button mat-button (click)="ExigencesMetierSuivant()">Exigences métier : {{etats_de_filtre[exigences_metier]}}</button>
+    <mat-form-field>
+      <mat-select #avancementsSelector placeholder="Avancements" multiple>
+        <mat-option *ngFor="let avancement of avancements" [value]="avancement.id">{{avancement.nom}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
   </mat-expansion-panel>
 </mat-accordion>
 
 <mat-card>
   <table matSort (matSortChange)="sortData($event)" class="table table-sm table-hover table-striped">
-    <thead>
+    <thead class="thead-light">
       <th>Projet</th>
       <th mat-sort-header="nom">Jalon</th>
       <th mat-sort-header="code">Code Colibri</th>
@@ -30,7 +52,13 @@
       <th mat-sort-header="date_derniere_modif">Dernière modification</th>
     </thead>
     <tbody>
-      <tr *ngFor="let version of versions | filtre_versions_cnil: CNIL | filtre_versions_rgs: RGS | filtre_versions_exigences_metier: exigences_metier">
+      <tr *ngFor="let version of versions | filtre_versions_cnil: CNIL
+                    | filtre_versions_rgs: RGS
+                    | filtre_versions_exigences_metier: exigences_metier
+                    | filtre_versions_projets: projetsSelector.value
+                    | filtre_versions_jalons: jalonsSelector.value
+                    | filtre_versions_types_de_suivi: typesDeSuiviSelector.value
+                    | filtre_versions_avancements: avancementsSelector.value">
         <td>{{version.projet.code + ' - ' + version.projet.nom}}</td>
         <td>{{version.jalon.nom}}</td>
         <td>{{version.code_colibri ? version.code_colibri : ''}}</td>

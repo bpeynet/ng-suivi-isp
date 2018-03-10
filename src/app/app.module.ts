@@ -24,6 +24,10 @@ import { FiltreProjetsLigneProduitPipe } from './filtre-projet-ligneproduit.pipe
 import { FiltreVersionsCNILPipe } from './filtre-versions-cnil.pipe';
 import { FiltreVersionsRGSPipe } from './filtre-versions-rgs.pipe';
 import { FiltreVersionsExigencesMetierPipe } from './filtre-versions-exigences-metier.pipe';
+import { FiltreVersionsProjetsPipe } from './filtre-versions-projets.pipe';
+import { FiltreVersionsJalonsPipe } from './filtre-versions-jalons.pipe';
+import { FiltreVersionsTypesDeSuiviPipe } from './filtre-versions-types_de_suivi.pipe';
+import { FiltreVersionsAvancementsPipe } from './filtre-versions-avancements.pipe';
 import { toDatePipe } from './toDate.pipe';
 import { ProjetComponent } from './projet/projet.component';
 import { LignesProduitResolverService } from './lignes-produit-resolver.service';
@@ -51,6 +55,10 @@ import { LigneProduitComponent } from './ligne-produit/ligne-produit.component';
     FiltreVersionsCNILPipe,
     FiltreVersionsRGSPipe,
     FiltreVersionsExigencesMetierPipe,
+    FiltreVersionsProjetsPipe,
+    FiltreVersionsJalonsPipe,
+    FiltreVersionsTypesDeSuiviPipe,
+    FiltreVersionsAvancementsPipe,
     toDatePipe,
     ProjetComponent,
     SuprasComponent,

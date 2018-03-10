@@ -3,6 +3,10 @@ import { Observable } from 'rxjs/Observable';
 
 import { HttpService } from '../http.service';
 import { Version } from '../version';
+import { Projet } from '../projet';
+import { Jalon } from '../jalon';
+import { TypeDeSuivi } from '../type-de-suivi';
+import { Avancement } from '../avancement';
 
 @Component({
   selector: 'versions',
@@ -12,6 +16,10 @@ import { Version } from '../version';
 export class VersionsComponent implements OnInit {
 
   public versions: Version[];
+  public projets: Projet[];
+  public jalons: Jalon[];
+  public types_de_suivi: TypeDeSuivi[];
+  public avancements: Avancement[];
   public CNIL: number = 0;
   public RGS: number = 0;
   public exigences_metier: number = 0;
@@ -30,6 +38,26 @@ export class VersionsComponent implements OnInit {
           return 0;
         }
       });
+    });
+    this.http.get('projets').subscribe((projets: Projet[]) => {
+      this.projets = projets.sort((p1: Projet, p2: Projet) => {
+        if (p1.code > p2.code) {
+          return 1;
+        } else if (p1.code < p2.code) {
+          return -1;
+        } else {
+          return 0;
+        }
+      });
+    });
+    this.http.get('jalons').subscribe((jalons: Jalon[]) => {
+      this.jalons = jalons;
+    });
+    this.http.get('suivis').subscribe((types_de_suivi: TypeDeSuivi[]) => {
+      this.types_de_suivi = types_de_suivi;
+    });
+    this.http.get('avancements').subscribe((avancements: Avancement[]) => {
+      this.avancements = avancements;
     });
   }
 
