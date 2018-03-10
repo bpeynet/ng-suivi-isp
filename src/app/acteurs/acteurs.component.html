@@ -1,3 +1,18 @@
-<p>
-  acteurs works!
-</p>
+<mat-card style="width:100%">
+  <table class="table table-sm table-striped table-hover">
+    <thead class="thead-light">
+      <th>Acteur</th>
+      <th>Est ingénieur sécurité</th>
+      <th>Est RSI Fab</th>
+      <th>Est architecte</th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let acteur of acteurs" (click)="selected=ligne_produit">
+        <td>{{acteur.prenom}} {{acteur.nom}}</td>
+        <td>{{acteur.est_ingenieur_secu ? "Oui" : "Non"}}</td>
+        <td>{{acteur.est_rsi_fab ? "Oui" : "Non"}}</td>
+        <td>{{acteur.est_architecte ? "Oui" : "Non"}}</td>
+      </tr>
+    </tbody>
+  </table>
+</mat-card>
