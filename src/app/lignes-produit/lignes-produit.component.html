@@ -21,11 +21,15 @@
 
   <div class="col-sm-4">
     <h2>Modifier une ligne produit</h2>
-    <ligne-produit [ligne_produit]="selected" [supras]="supras"></ligne-produit>
+    <ligne-produit [ligne_produit]="selected" [supras]="supras"
+      [inges_secu]="inges_secu" [rsis_fab]="rsis_fab" [architectes]="architectes">
+    </ligne-produit>
   </div>
 
   <div class="col-sm-4">
     <h2>Créer une ligne produit</h2>
-    <ligne-produit-form [supras]="supras"></ligne-produit-form>
+    <ligne-produit-form [supras]="supras"
+      [inges_secu]="inges_secu" [rsis_fab]="rsis_fab" [architectes]="architectes">
+    </ligne-produit-form>
   </div>
 </div>

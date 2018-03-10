@@ -3,6 +3,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { HttpService } from '../http.service';
 import { LigneProduit } from '../ligne-produit';
 import { Supra } from '../supra';
+import { Acteur } from '../acteur';
 
 @Component({
   selector: 'ligne-produit-form',
@@ -13,6 +14,9 @@ export class LigneProduitFormComponent implements OnInit {
 
   ligne_produit: LigneProduit;
   @Input() supras: Supra[];
+  @Input() public inges_secu: Acteur[];
+  @Input() public rsis_fab: Acteur[];
+  @Input() public architectes: Acteur[];
 
   constructor(private http: HttpService) { }
 

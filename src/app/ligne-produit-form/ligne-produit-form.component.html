@@ -1,11 +1,51 @@
-<mat-select placeholder="Supra" [(ngModel)]="ligne_produit.supra" required #supra="ngModel">
-  <mat-option *ngFor="let supra of supras" [value]="supra">
-    {{ supra.libelle }}
-  </mat-option>
-</mat-select>
+<mat-form-field>
+  <mat-select placeholder="Supra" [(ngModel)]="ligne_produit.supra" required #supra="ngModel">
+    <mat-option *ngFor="let supra of supras" [value]="supra">
+      {{ supra.libelle }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
 
 <mat-form-field>
   <input matInput placeholder="Nom" [(ngModel)]="ligne_produit.libelle" required #nom="ngModel">
 </mat-form-field>
 
-<button mat-button (click)="creer()" [disabled]="nom.invalid || supra.invalid">Créer</button>
+<mat-form-field>
+  <mat-select placeholder="Ingénieur(s) sécurité" [(ngModel)]="ligne_produit.inges_secu"
+    multiple #ingessecuSelector="ngModel">
+    <mat-option *ngFor="let inge_secu of inges_secu" [value]="inge_secu">
+      {{ inge_secu.prenom + ' ' + inge_secu.nom }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+
+<mat-form-field>
+  <mat-select placeholder="RSI(s) Fab" [(ngModel)]="ligne_produit.rsis_fab"
+    multiple #rsisfabSelector="ngModel">
+    <mat-option *ngFor="let rsi_fab of rsis_fab" [value]="rsi_fab">
+      {{ rsi_fab.prenom + ' ' + rsi_fab.nom }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+
+<mat-form-field>
+  <mat-select placeholder="Architectes" [(ngModel)]="ligne_produit.architectes"
+    multiple #architectesSelector="ngModel">
+    <mat-option *ngFor="let architecte of architectes" [value]="architecte">
+      {{ architecte.prenom + ' ' + architecte.nom }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+
+<button mat-button (click)="creer()"
+  [disabled]="nom.invalid || supraSelector.invalid
+    || ingessecuSelector.invalid
+    || rsisfabSelector.invalid
+    || architectesSelector.invalid
+    || (!nom.dirty
+    && !supraSelector.dirty
+    && !ingessecuSelector.dirty
+    && !rsisfabSelector.dirty
+    && !architectesSelector.dirty)">
+    Créer
+</button>

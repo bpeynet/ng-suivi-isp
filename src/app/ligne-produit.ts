@@ -6,8 +6,8 @@ export class LigneProduit {
   libelle: string;
   id_supra: number;
   supra: Supra;
-  inge_secu: Acteur;
-  rsi_fab: Acteur[];
+  inges_secu: Acteur[];
+  rsis_fab: Acteur[];
   architectes: Acteur[];
 
   static sort(l1: LigneProduit, l2: LigneProduit) {

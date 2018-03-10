@@ -3,6 +3,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { HttpService } from '../http.service';
 import { LigneProduit } from '../ligne-produit';
 import { Supra } from '../supra';
+import { Acteur } from '../acteur';
 
 @Component({
   selector: 'ligne-produit',
@@ -15,6 +16,11 @@ export class LigneProduitComponent implements OnInit {
   public brouillon: LigneProduit;
   public _supras: Supra[];
   public _supras_simples: Supra[];
+  @Input() public inges_secu: Acteur[];
+  @Input() public rsis_fab: Acteur[];
+  @Input() public architectes: Acteur[];
+  public Acteur = Acteur;
+  public Supra = Supra;
 
   constructor(private http: HttpService) { }
 
@@ -62,10 +68,6 @@ export class LigneProduitComponent implements OnInit {
         Object.assign(this._ligne_produit, this.brouillon);
       }
     );
-  }
-
-  compareFn(s1: Supra, s2: Supra): boolean {
-    return s1 && s2 ? s1.id === s2.id : s1 === s2;
   }
 
 }

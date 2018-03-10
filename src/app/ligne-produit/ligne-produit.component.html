@@ -1,17 +1,55 @@
 
 <div *ngIf="brouillon; else pasdeLigneProduit">
-  <mat-select placeholder="Supra" [(ngModel)]="brouillon.supra" [compareWith]="compareFn" required #supra="ngModel">
-    <mat-option *ngFor="let supra of _supras_simples" [value]="supra">
-      {{ supra.libelle }}
-    </mat-option>
-  </mat-select>
+  <mat-form-field>
+    <mat-select placeholder="Supra" [(ngModel)]="brouillon.supra"
+      [compareWith]="Supra.compare" required #supraSelector="ngModel">
+      <mat-option *ngFor="let supra of _supras_simples" [value]="supra">
+        {{ supra.libelle }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
 
   <mat-form-field>
     <input matInput placeholder="Nom" [(ngModel)]="brouillon.libelle" required #nom="ngModel" />
   </mat-form-field>
 
+  <mat-form-field>
+    <mat-select placeholder="Ingénieur(s) sécurité" [(ngModel)]="brouillon.inges_secu"
+      [compareWith]="Acteur.compare" multiple #ingessecuSelector="ngModel">
+      <mat-option *ngFor="let inge_secu of inges_secu" [value]="inge_secu">
+        {{ inge_secu.prenom + ' ' + inge_secu.nom }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-select placeholder="RSI(s) Fab" [(ngModel)]="brouillon.rsis_fab"
+      [compareWith]="Acteur.compare" multiple #rsisfabSelector="ngModel">
+      <mat-option *ngFor="let rsi_fab of rsis_fab" [value]="rsi_fab">
+        {{ rsi_fab.prenom + ' ' + rsi_fab.nom }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-select placeholder="Architectes" [(ngModel)]="brouillon.architectes"
+      [compareWith]="Acteur.compare" multiple #architectesSelector="ngModel">
+      <mat-option *ngFor="let architecte of architectes" [value]="architecte">
+        {{ architecte.prenom + ' ' + architecte.nom }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
   <button mat-button (click)="enregistrer()"
-    [disabled]="(nom.invalid || !nom.dirty) && (supra.invalid || !supra.dirty)">
+    [disabled]="nom.invalid || supraSelector.invalid
+      || ingessecuSelector.invalid
+      || rsisfabSelector.invalid
+      || architectesSelector.invalid
+      || (!nom.dirty
+      && !supraSelector.dirty
+      && !ingessecuSelector.dirty
+      && !rsisfabSelector.dirty
+      && !architectesSelector.dirty)">
     Enregistrer
   </button>
 </div>
