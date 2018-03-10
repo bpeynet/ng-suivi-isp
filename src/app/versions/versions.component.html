@@ -8,18 +8,18 @@
         Cliquer ici pour {{ filtres.expanded ? 'cacher' : 'afficher' }} les champs
       </mat-panel-description>
     </mat-expansion-panel-header>
-
-    <mat-button-toggle #CNIL>CNIL</mat-button-toggle>
-    <mat-button-toggle #RGS>Homolgation RGS ?</mat-button-toggle>
-    <mat-button-toggle #exigences_metier>Exigences métier</mat-button-toggle>
+    <button mat-button (click)="CNILsuivant()">CNIL : {{etats_de_filtre[CNIL]}}</button>
+    <button mat-button (click)="RGSsuivant()">Homologation RGS : {{etats_de_filtre[RGS]}}</button>
+    <button mat-button (click)="ExigencesMetierSuivant()">Exigences métier : {{etats_de_filtre[exigences_metier]}}</button>
   </mat-expansion-panel>
 </mat-accordion>
 
 <mat-card>
-  <table matSort (matSortChange)="sortData($event)">
-    <tr>
-      <th mat-sort-header="code">Code Colibri</th>
+  <table matSort (matSortChange)="sortData($event)" class="table table-sm table-hover table-striped">
+    <thead>
+      <th>Projet</th>
       <th mat-sort-header="nom">Jalon</th>
+      <th mat-sort-header="code">Code Colibri</th>
       <th>Type de suivi</th>
       <th>CNIL ?</th>
       <th>Homologation RGS ?</th>
@@ -28,18 +28,21 @@
       <th mat-sort-header="commentaires">Commentaires</th>
       <th mat-sort-header="date_creation">Date de création</th>
       <th mat-sort-header="date_derniere_modif">Dernière modification</th>
-    </tr>
-    <tr *ngFor="let version of versions | async">
-      <td>{{version.code_colibri}}</td>
-      <td>{{version.jalon}}</td>
-      <td>{{version.suivi}}</td>
-      <td>{{version.CNIL}}</td>
-      <td>{{version.homologation_RGS}}</td>
-      <td>{{version.exigences_metier}}</td>
-      <td>{{version.avancement}}</td>
-      <td>{{version.commentaires}}</td>
-      <td>{{version.date_creation | toDate}}</td>
-      <td>{{version.date_derniere_modif | toDate}}</td>
-    </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let version of versions | filtre_versions_cnil: CNIL | filtre_versions_rgs: RGS | filtre_versions_exigences_metier: exigences_metier">
+        <td>{{version.projet.code + ' - ' + version.projet.nom}}</td>
+        <td>{{version.jalon.nom}}</td>
+        <td>{{version.code_colibri ? version.code_colibri : ''}}</td>
+        <td>{{version.type_de_suivi.type}}</td>
+        <td>{{version.CNIL ? "Oui" : "Non"}}</td>
+        <td>{{version.homologation_RGS ? "Oui" : "Non"}}</td>
+        <td>{{version.exigences_metier ? "Oui" : "Non"}}</td>
+        <td>{{version.avancement.nom}} ({{version.avancement.pourcentage}}%)</td>
+        <td><span innerHTML="{{version.commentaires}}"></span></td>
+        <td>{{version.date_creation | toDate}}</td>
+        <td>{{version.date_derniere_modif | toDate}}</td>
+      </tr>
+    </tbody>
   </table>
 </mat-card>
