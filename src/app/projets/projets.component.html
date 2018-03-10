@@ -64,7 +64,13 @@
           projet.ligne_produit.supra.libelle + ' - ' + projet.ligne_produit.libelle
           : "Pas associé"
         }}</td>
-        <td>{{projet.ligne_produit && projet.ligne_produit.inge_secu ? projet.ligne_produit.inge_secu.prenom + ' ' + projet.ligne_produit.inge_secu.nom : ''}}</td>
+        <td>
+          <span *ngIf="projet.ligne_produit">
+            <p *ngFor="let inge_secu of projet.ligne_produit.inges_secu">
+              {{inge_secu.prenom + ' ' + inge_secu.nom}}
+            </p>
+          </span>
+        </td>
         <td>{{projet.code}}</td>
         <td>{{projet.nom}}</td>
         <td>{{projet.chef}}</td>

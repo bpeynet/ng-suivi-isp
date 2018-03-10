@@ -14,6 +14,6 @@ export class ProjetsResolverService implements Resolve<Projet[]> {
   constructor(private http: HttpService) { }
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Projet[]> {
-    return this.http.get('projets?relations=ligne_produit.supra,ligne_produit.inge_secu');
+    return this.http.get('projets?relations=ligne_produit.supra,ligne_produit.inges_secu');
   }
 }
