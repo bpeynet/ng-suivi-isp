@@ -16,4 +16,14 @@ export class Version {
     commentaires: string;
     date_creation: string;
     date_derniere_modif: string;
+
+    static tri(v1: Version, v2: Version) {
+      if (v1.projet.id > v2.projet.id) {
+        return 1;
+      } else if (v1.projet.id < v2.projet.id) {
+        return -1;
+      } else {
+        return 0;
+      }
+    }
 }

@@ -12,4 +12,15 @@ export class Projet {
   date_derniere_modif: string;
   versions: Version[];
   ligne_produit: LigneProduit;
+
+  static triSelonCode(p1: Projet, p2: Projet) {
+    if (p1.code > p2.code) {
+      return 1;
+    } else if (p1.code < p2.code) {
+      return -1;
+    } else {
+      return 0;
+    }
+  }
+  
 }

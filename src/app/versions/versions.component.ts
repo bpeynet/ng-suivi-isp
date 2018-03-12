@@ -29,26 +29,10 @@ export class VersionsComponent implements OnInit {
 
   ngOnInit() {
     this.http.get('versions?relations=projet,jalon,type_de_suivi,avancement').subscribe((versions: Version[]) => {
-      this.versions = versions.sort((v1: Version, v2: Version) => {
-        if (v1.projet.id > v2.projet.id) {
-          return 1;
-        } else if (v1.projet.id < v2.projet.id) {
-          return -1;
-        } else {
-          return 0;
-        }
-      });
+      this.versions = versions.sort(Version.tri);
     });
     this.http.get('projets').subscribe((projets: Projet[]) => {
-      this.projets = projets.sort((p1: Projet, p2: Projet) => {
-        if (p1.code > p2.code) {
-          return 1;
-        } else if (p1.code < p2.code) {
-          return -1;
-        } else {
-          return 0;
-        }
-      });
+      this.projets = projets.sort(Projet.triSelonCode);
     });
     this.http.get('jalons').subscribe((jalons: Jalon[]) => {
       this.jalons = jalons;
