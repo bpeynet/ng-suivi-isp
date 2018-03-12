@@ -1,18 +1,18 @@
 <mat-toolbar style="position: fixed; z-index:900; background-color: #1d2127; color: white; max-height: 50px; min-height: 50px;"
   class="mat-elevation-z2">
   <mat-toolbar-row>
+    <button mat-icon-button (click)="sidenav.toggle()">
+      <mat-icon>menu</mat-icon>
+    </button>
     <h1>Suivi des ISP</h1>
     <span style="flex: 1 0 auto;"></span>
     <button mat-icon-button routerLink="" routerLinkActive="active"
       [routerLinkActiveOptions]="{exact: true}">
       <mat-icon>home</mat-icon>
     </button>
-    <button mat-icon-button (click)="sidenav.toggle()">
-      <mat-icon>menu</mat-icon>
-    </button>
     <mat-menu #appMenu="matMenu" [overlapTrigger]="false">
-      <button mat-menu-item>Projet</button>
-      <button mat-menu-item>Version</button>
+      <button mat-menu-item (click)="ouvrirProjetForm()">Projet</button>
+      <button mat-menu-item (click)="ouvrirVersionForm()">Version</button>
     </mat-menu>
 
     <button mat-icon-button [matMenuTriggerFor]="appMenu">
@@ -48,6 +48,12 @@
         Supra
       </mat-list-item>
     </mat-list>
+  </mat-sidenav>
+  <mat-sidenav position="end" #tiroirDeDroite [opened]="projetForm || versionForm"  fixedInViewport fixedTopGap=50>
+    <mat-card style="width: 450px">
+      <projet-form *ngIf="projetForm"></projet-form>
+      <version-form *ngIf="versionForm"></version-form>
+    </mat-card>
   </mat-sidenav>
   <mat-sidenav-content style="margin-top: 55px; padding: 0 20px;">
     <router-outlet></router-outlet>

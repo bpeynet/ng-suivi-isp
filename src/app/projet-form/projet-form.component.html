@@ -1,0 +1,36 @@
+<h2>Nouveau projet</h2>
+
+<mat-form-field>
+  <mat-select placeholder="Ligne produit" [(ngModel)]="projet.ligne_produit" required #ligneproduit="ngModel">
+    <mat-optgroup *ngFor="let supra of supras" [label]="supra.libelle">
+      <mat-option *ngFor="let ligne_produit of supra.lignes_produit" [value]="ligne_produit">
+        {{ ligne_produit.libelle }}
+      </mat-option>
+    </mat-optgroup>
+  </mat-select>
+</mat-form-field>
+
+<mat-form-field>
+  <input matInput placeholder="Code" [(ngModel)]="projet.code" type="number">
+</mat-form-field>
+
+<mat-form-field>
+  <input matInput placeholder="Nom" [(ngModel)]="projet.nom" required #nom="ngModel">
+</mat-form-field>
+
+<mat-form-field>
+  <input matInput placeholder="Chef de projet" [(ngModel)]="projet.chef">
+</mat-form-field>
+
+<mat-form-field>
+  <input matInput placeholder="Programme" [(ngModel)]="projet.programme">
+</mat-form-field>
+
+<mat-form-field>
+  <textarea matInput matTextareaAutosize placeholder="Commentaires" [(ngModel)]="projet.commentaires"></textarea>
+</mat-form-field>
+
+<button mat-button [disabled]="nom.invalid || ligneproduit.invalid">
+  <mat-icon>save</mat-icon>
+  Ajouter
+</button>

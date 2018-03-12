@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { MatSidenav } from '@angular/material';
 
 @Component({
   selector: 'app-root',
@@ -8,6 +9,10 @@ import { Component } from '@angular/core';
 export class AppComponent {
   public sidenavWidth: number;
   public reduit: boolean;
+  public projetForm: boolean;
+  public versionForm: boolean;
+
+  @ViewChild('tiroirDeDroite') tiroirDeDroite: MatSidenav;
 
   ouvre(){
     this.reduit = false;
@@ -17,5 +22,17 @@ export class AppComponent {
   ferme(){
     this.reduit = true;
     //this.sidenavWidth = 4;
+  }
+
+  ouvrirProjetForm() {
+    this.tiroirDeDroite.open();
+    this.projetForm = true;
+    this.versionForm = false;
+  }
+
+  ouvrirVersionForm() {
+    this.tiroirDeDroite.open();
+    this.versionForm = true;
+    this.projetForm = false;
   }
 }

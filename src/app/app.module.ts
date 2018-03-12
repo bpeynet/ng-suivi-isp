@@ -41,6 +41,8 @@ import { SupraComponent } from './supra/supra.component';
 import { SupraFormComponent } from './supra-form/supra-form.component';
 import { LigneProduitFormComponent } from './ligne-produit-form/ligne-produit-form.component';
 import { LigneProduitComponent } from './ligne-produit/ligne-produit.component';
+import { ProjetFormComponent } from './projet-form/projet-form.component';
+import { VersionFormComponent } from './version-form/version-form.component';
 
 @NgModule({
   declarations: [
@@ -68,6 +70,8 @@ import { LigneProduitComponent } from './ligne-produit/ligne-produit.component';
     SupraFormComponent,
     LigneProduitFormComponent,
     LigneProduitComponent,
+    ProjetFormComponent,
+    VersionFormComponent,
   ],
   imports: [
     HttpClientModule,

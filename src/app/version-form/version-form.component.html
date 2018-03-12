@@ -1,0 +1,46 @@
+<h2>Nouvelle version</h2>
+
+<mat-form-field>
+  <mat-select placeholder="Projet" [(ngModel)]="version.projet" required #projet="ngModel">
+    <mat-option *ngFor="let projet of projets" [value]="projet">
+      {{ projet.code + ' - ' + projet.nom }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+
+<mat-form-field>
+  <mat-select placeholder="Jalon" [(ngModel)]="version.jalon" required #jalon="ngModel">
+    <mat-option *ngFor="let jalon of jalons" [value]="jalon">
+      {{ jalon.nom }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+
+<mat-form-field>
+  <input matInput placeholder="Code colibri" [(ngModel)]="version.code_colibri">
+</mat-form-field>
+
+<mat-form-field>
+  <mat-select placeholder="Type de suivi" [(ngModel)]="version.type_de_suivi" required #typedesuivi="ngModel">
+    <mat-option *ngFor="let type_de_suivi of types_de_suivi" [value]="type_de_suivi">
+      {{ type_de_suivi.type }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+
+<mat-form-field>
+  <mat-select placeholder="Avancement" [(ngModel)]="version.avancement">
+    <mat-option *ngFor="let avancement of avancements" [value]="avancement">
+      {{ avancement.nom }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+
+<mat-form-field>
+  <textarea matInput matTextareaAutosize placeholder="Commentaires" [(ngModel)]="version.commentaires"></textarea>
+</mat-form-field>
+
+<button mat-button [disabled]="projet.invalid || jalon.invalid">
+  <mat-icon>save</mat-icon>
+  Ajouter
+</button>
